@@ -77,7 +77,7 @@ First let's get the encrypted versions of the files we need
 
 untar your full firmware file :
 
-tar -xvf ./V01https://github.com/CunningLogic/DUMLRacer.00.0900_Spark_dji_system.bin
+tar -xvf ./V01.00.0900_Spark_dji_system.bin
 or
 tar -xvf ./V01.04.0300_Mavic_dji_system.bin
 or
