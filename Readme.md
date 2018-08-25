@@ -236,7 +236,7 @@ aaeb606a4a86fb1fc9a0f6bc6314d3a4  wm100_0306_v03.02.43.20_20170920.pro.fw_0306.d
 At this stage, you have a decrypted version of the 0306 flight controller module. You can check the binary file
 with some binary editor (e.g. 010 Editor) and should be able to spot some human readable strings inside
 
-6. Extract flight controller parameters
+#### 6. Extract flight controller parameters
 
 `./dji-firmware-tools/dji_flyc_param_ed.py -vv -x -b 0x420000 -m wm100_0306_v03.02.43.20_20170920.pro.fw_0306.decrypted.bin`
 or
