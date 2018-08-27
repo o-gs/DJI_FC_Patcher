@@ -3,7 +3,7 @@ Custom FC patcher and flashing method for DJI Spark and DJI Mavic Pro / Pro Plat
 
 by @Matioupi (mathieu.peyrega@gmail.com), credits to all OG's for their work and ideas
 
-This document and the attached scripts provide a method for patching / modding the
+This document and the attached scripts provides a method for patching / modding the
 FC (flight controller, a.k.a. 0306 module) on following DJI birds :
  
 * DJI Spark
@@ -18,19 +18,23 @@ at this point of first release, it works ONLY with the following firmware versio
 * 1.04.0300 for DJI Mavic Pro (there is a 1.04.0400 fw which does not bring any new FC feature)
 * 1.05.0600 for DJI Phantom 4 Pro
 * 2.00.0700 for DJI Phantom 4 standard
-* 03.02.35.06 for DJI Phantom 4 advanced
+* 1.00.0128 for DJI Phantom 4 advanced
 
 modder for Spark, Mavic Pro series, P4P are fully tested. Other birds are untested at this point, waiting for volunteers...
 
 The patcher allows you to tune :
 
-- all flight parameters including the hidden ones
+- all flight parameters including the hidden ones (NFZ, alt limit,...)
 - plus some hard-coded parameters inside FC
-- plus add some new feature such as Galileo satellites reception
+- plus add some new features such as Galileo satellites reception
 
 Galileo mod also requires an App side patch which is only available though NLD at time.
 
-If you flash a custom FC, it is still possible to rollback to a 100% stock FC by reflashing the full stock firmware.
+edit : from discussions here : https://github.com/o-gs/DJI_FC_Patcher/issues/3
+
+it seems that with constellation status as of 27th august 2018, the FC patch by itself is enough to get the Galileo reception working. This is expected behaviour by a GNSS receiver and previous status where the ephemerids needed a first manual load as described at step 15 seems not to be mandatory anymore. So step 15 of this guide maybe optionnal and you still have Galileo enabled.
+
+If you flash a custom FC, it is still possible to rollback to a 100% stock FC by reflashing the full stock firmware. All DJI bird firmwares do not explicitly set the GNSS settings, so GNSS settings may stick even after a rollback to official firmware.
 
 Don't use the modded FC to do stupid things !
 
@@ -38,13 +42,12 @@ Pre-requisites
 --------------
 
 * Understanding what you do and understanding that you might brick your bird if you don't respect steps and even if you do (who knows...)
-* Aknowledging and accepting all the risks and consequences of trying what is described in this document and acknowledging that you can't blame anybody if something goes wrong during or after the mod.
-
+* Acknowledging and accepting all the risks and consequences of trying what is described in this document and acknowledging that you can't blame anybody if something goes wrong during or after the mod.
 * Being able to use adb and basic command line tools on Linux systems
 * Being able to clone/install a git repo from github
 * Understand and do yourself all small mods such as changing a path for calling a command given in this doc to the actual place you installed it on your setup
 * Being able to install any linux missing package/tool that might be needed for the operations
-* Having a recent install of Mefisto firmware tools :
+* Having a recent install of @Mefisto firmware tools :
 https://github.com/o-gs/dji-firmware-tools
 (runs on Linux)
 
@@ -59,9 +62,9 @@ https://github.com/cs2000/DankDroneDownloader
 * Having a rooted bird, you can use 
 https://github.com/CunningLogic/DUMLRacer
 https://github.com/CunningLogic/UberSploits
-or there is even a one click button on the latest DUMLDore v3 version
+or there is even a one click button on the latest DUMLDore v3 version (first 2 will not work for P4P, only Spark and Mavic)
 
-* Being able to use DUMLDore v3
+* Being able to use @jezzab DUMLDore v3 : https://github.com/jezzab/DUMLdore/releases
 
 As you already understand, part of the job has to be done on a Windows machine (flashing) and part of the job under a Linux machine (FC file preparation).
 It has not been tested what works and don't works if you try using WSL for example. Working with WSL is at your own risks.
@@ -85,7 +88,7 @@ or
 
 depending on your bird
 
-You will get a bunch of .pro.fw.sig files (for each aprt of the system) plus a configuration file : wm100a.cfg.sig (Spark) or wm220.cfg.sig (Mavic) or wm331.cfg.sig (P4P) files
+You will get a bunch of .pro.fw.sig files (for each part of the system) plus a configuration file : wm100a.cfg.sig (Spark) or wm220.cfg.sig (Mavic) or wm331.cfg.sig (P4P) files
 
 Amongst those, only 3 files will be usefull :
 1. the one with 0305 in name (Flight controller loader) : there is no 0305 module for this P4P fw version
@@ -172,13 +175,13 @@ adb shell
 cd /vendor/bin/
 ```
 
-use the dji_verify DJI binary (it lives in /sbin/) to do the nasty crypto job for you :
+use the dji_verify DJI binary (it lives in /sbin/ for Mavic and Spark and in /system/bin/ for P4P, adjust command according to actual dji_verify binary location) to do the nasty crypto job for you :
 
 `/sbin/dji_verify -n 0306 -o 0306.unsig wm100_0306_v03.02.43.20_20170920.pro.fw.sig`
 or
 `/sbin/dji_verify -n 0306 -o 0306.unsig wm220_0306_v03.02.44.07_20171116.pro.fw.sig`
 or
-`/sbin/dji_verify -n 0306 -o 0306.unsig wm331_0306_v03.02.44.07_20171116.pro.fw.sig`
+`/system/bin/dji_verify -n 0306 -o 0306.unsig wm331_0306_v03.02.44.07_20171116.pro.fw.sig`
 
 at this stage exit the adb shell and pull the file you've been generating :
 ```
@@ -250,6 +253,11 @@ The . is sometimes changed by _ compared to how variables were named in the DJI 
 #### 7. Mod you flyc_param_infos with a text file
 
 Same old recipies as the ones from module mixing times... tune your max tilt, etc to get the bird flavor you like to have
+There are plenty of excellent guides online :
+
+https://www.rcgroups.com/forums/showthread.php?2916078-DJI-Dashboard-How-To-tips-and-tricks-*MAVIC*
+https://www.rcgroups.com/forums/showthread.php?3058818-Rooting-Mavic-Pro-in-Latest-firmware-with-Force-FCC-and-Boost-and-No-NFZ
+https://dji.retroroms.info/howto/parameterindex
 
 #### 8. Setup the file to build the flashable image
 
@@ -504,14 +512,14 @@ This means that the agps file have been correctly uploaded to the bird and pushe
 
 This application : https://play.google.com/store/apps/details?id=com.nec.android.qzss.gnssview&hl=fr
 
-allows checking for planned constellations at a given palce / date / time
+allows checking for planned constellations at a given place / date / time
 
 The receiver is configured for GPS+GLO+GAL with a 5° horizon. Even with open sky, all sats between 5 and 10° might not be tracked so this is only an indication.
 You can set the constellation planning app mask to 10° to spot a test flight time with lots of satellites. You're almost guaranteed to see those (above 10°) plus a part of those between 5 and 10°. In other words if you set the planning app mask to 5°, you will usually see less satellites than planned because you are not guaranteed to see those in the 5-10° above horizon range.
 
 The best way to check that Galileo has correctly been enabled is to pull a FLYNNN.DAT flight from /blackbox/flyctrl/ after your test flight and use CsvView from https://datfile.net/
-While plotting the 3 "signals" : total satellites count, GPS satellites count and Glonass satellites count. You'll see that total > GPS+GLO. The issing satellites (maybe 3 to 6-7) are the Galileo ones.
+While plotting the 3 "signals" : total satellites count, GPS satellites count and Glonass satellites count. You'll see that total > GPS+GLO. The missing satellites (maybe 3 to 6-7) are the Galileo ones.
 
 4 Galileo satellites launched in december 2017 are above us right now but one not been comissioned yet (24/08/2018). They should soon be commissioned and this will provide even more sats.
-4 mor sats where launched on July 15th 2018 and should be commissionned beginning of 2019. Up to date info : https://www.gsc-europa.eu/system-status/Constellation-Information
+4 more sats where launched on July 15th 2018 and should be commissionned beginning of 2019. Up to date info : https://www.gsc-europa.eu/system-status/Constellation-Information
 
