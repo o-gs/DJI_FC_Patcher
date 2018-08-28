@@ -124,7 +124,7 @@ the .cfg file matching the .cfg.sig file can be retrieved with the image.py scri
 (you may need to change the full path to dji_rev/tools/image.py from the command lines given here)
 
 ```
-./dji_rev/tools/image.py wm220
+./dji_rev/tools/image.py wm220.cfg.sig
 mv wm220.cfg_0000.bin wm220.cfg.ori
 ```
 
