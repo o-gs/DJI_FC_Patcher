@@ -13,26 +13,30 @@
 #
 
 
-#   Modify the following variable to point to your install of 
+#   Modify the following variable to point to your install of
 #   Mefisto firmware tools https://github.com/o-gs/dji-firmware-tools
 
-PATH_TO_TOOLS=~mathieu/Dev/DJI_Tuning
+if [[ -z "${PATH_TO_TOOLS}" ]]; then
+  echo "Define PATH_TO_TOOLS variable to use this script! eg:"
+  echo "PATH_TO_TOOLS=/tmp/tools/ ./FC_patch_sequence_for_dummy_verify.sh"
+  exit 1
+fi
 
 if [ "$#" -eq 2 ]; then
     VERSION="$2"
 else
     echo "################################################################################"
-    echo "FC_patch_sequence_for_og_verify.sh 1.0 by @Matioupi"
-    echo "usage :"
-    echo "        FC_patch_sequence_for_og_verify.sh birdname aa.bb.cc.dd"
-    echo "        birdname is one of Spark, Mavic, P4P, P4std, P4adv"
-    echo "        aa.bb.cc.dd is the new FC 0306 module version number"
+    echo "  FC_patch_sequence_for_og_verify.sh 1.0 by @Matioupi"
+    echo "  usage :"
+    echo "          FC_patch_sequence_for_og_verify.sh birdname aa.bb.cc.dd"
+    echo "          birdname is one of Spark, Mavic, P4P, P4std, P4adv"
+    echo "          aa.bb.cc.dd is the new FC 0306 module version number"
     echo ""
     echo "  exemple : ./FC_patch_sequence_for_og_verify.sh Spark 03.02.43.21"
     echo "  exemple : ./FC_patch_sequence_for_og_verify.sh Mavic 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_og_verify.sh P4P 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4std 03.02.44.08"
-    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"    
+    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"
     echo "################################################################################"
 fi
 

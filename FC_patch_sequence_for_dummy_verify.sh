@@ -13,10 +13,14 @@
 #
 
 
-#   Modify the following variable to point to your install of 
+#   Modify the following variable to point to your install of
 #   Mefisto firmware tools https://github.com/o-gs/dji-firmware-tools
 
-PATH_TO_TOOLS=~mathieu/Dev/DJI_Tuning
+if [[ -z "${PATH_TO_TOOLS}" ]]; then
+  echo "Define PATH_TO_TOOLS variable to use this script! eg:"
+  echo "PATH_TO_TOOLS=/tmp/tools/ ./FC_patch_sequence_for_dummy_verify.sh"
+  exit 1
+fi
 
 if [ "$#" -eq 2 ]; then
     VERSION="$2"
@@ -32,7 +36,7 @@ else
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh Mavic 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4P 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4std 03.02.44.08"
-    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"        
+    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"
     echo "################################################################################"
     exit 0
 fi
