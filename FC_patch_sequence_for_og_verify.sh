@@ -18,7 +18,7 @@
 
 if [[ -z "${PATH_TO_TOOLS}" ]]; then
   echo "Define PATH_TO_TOOLS variable to use this script! eg:"
-  echo "PATH_TO_TOOLS=/tmp/tools/ ./FC_patch_sequence_for_dummy_verify.sh"
+  echo "PATH_TO_TOOLS=/tmp/tools/ ./FC_patch_sequence_for_og_verify.sh"
   exit 1
 fi
 
