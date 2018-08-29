@@ -278,7 +278,7 @@ files for the FC_Patcher :
 
 Running the patcher without files all being inside same dir has not been tested
 
-#### 9. Modify the packer script FC_patch_sequence_for_dummy_verify.sh
+#### 9. Export PATH_TO_TOOLS variable
 
 Run `export PATH_TO_TOOLS=X` where X is path where dji-firmware-tools is before next step
 
