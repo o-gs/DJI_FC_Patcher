@@ -173,7 +173,7 @@ printf "$fake_header" | cat - "$INDEX_FILE" > temp_"$INDEX_FILE" && mv temp_"$IN
 echo "################################################################################"
 echo " Preparing tar file dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin"
 echo "################################################################################"
-rm dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin
+rm dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin &> /dev/null  # this clean was confusing
 tar -cvf dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin *.sig
 if [ $? != 0 ]
 then
