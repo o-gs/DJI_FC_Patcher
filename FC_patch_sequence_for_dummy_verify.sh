@@ -125,7 +125,8 @@ echo "               Patching flight parameters hardcoded values"
 echo "               Adding U-Blox custom configuration"
 echo "################################################################################"
 
-/usr/bin/python "$PATH_TO_TOOLS"/DJI_FC_Patcher/patch_"$AC_PREFIX"_"$MODULE".py $TMP_FILENAME1 $VERSION
+# call it using python version 2
+python2 "$PATH_TO_TOOLS"/DJI_FC_Patcher/patch_"$AC_PREFIX"_"$MODULE".py $TMP_FILENAME1 $VERSION
 if [ $? != 0 ]
 then
     echo "#### Issue while patching module ####"
