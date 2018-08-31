@@ -60,14 +60,14 @@ def path_creation():
         os.mkdir(os.path.join(script_path, 'dji_fc_patcher', 'tmp'))
         os.mkdir(os.path.join(script_path, 'dji_fc_patcher', 'tmp', 'tools'))
     except Exception:
-        subprocess.check_output(["rm", "-r", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
+        subprocess.check_output(["rm", "-rf", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
         path_creation()
 
 
 def tmp_clean():
     print(" -- 6. Shall I clean `dji_fc_patcher/tmp` directory? output files are safe inside `dji_fc_patcher` dir.\n")
     user_prompt()
-    subprocess.check_output(["rm", "-r", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
+    subprocess.check_output(["rm", "-rf", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
     print("\nByebye!~")
 
 
