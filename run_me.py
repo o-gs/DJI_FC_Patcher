@@ -60,14 +60,14 @@ def path_creation():
         os.mkdir(os.path.join(script_path, 'dji_fc_patcher', 'tmp'))
         os.mkdir(os.path.join(script_path, 'dji_fc_patcher', 'tmp', 'tools'))
     except Exception:
-        subprocess.check_output(["rm", "-r", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
+        subprocess.check_output(["rm", "-rf", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
         path_creation()
 
 
 def tmp_clean():
     print(" -- 6. Shall I clean `dji_fc_patcher/tmp` directory? output files are safe inside `dji_fc_patcher` dir.\n")
     user_prompt()
-    subprocess.check_output(["rm", "-r", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
+    subprocess.check_output(["rm", "-rf", os.path.join(script_path, 'dji_fc_patcher', 'tmp')])
     print("\nByebye!~")
 
 
@@ -115,7 +115,7 @@ def extract_fw():
 def _clean_module_files():
     files = os.listdir(tmp_dir)
     rm_me = []
-    keep_me = ['_0305_', '_0306_', 'wm220.cfg.sig', '.unsig', 'flyc_param_infos', 'tools']
+    keep_me = ['_0305_', '_0306_', '.cfg.sig', '.unsig', 'flyc_param_infos', 'tools']
     for f in files:
         if not any(i in f for i in keep_me):
             rm_me.append(f)
