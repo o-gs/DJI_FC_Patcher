@@ -278,11 +278,11 @@ files for the FC_Patcher :
 
 Running the patcher without files all being inside same dir has not been tested
 
-#### 11. Modify the packer script FC_patch_sequence_for_dummy_verify.sh
+#### 9. Export PATH_TO_TOOLS variable
 
-Edit the FC_patch_sequence_for_dummy_verify.sh file to change the variable PATH_TO_TOOLS so it points to the path where dji-firmware-tools is installed
+Run `export PATH_TO_TOOLS=X` where X is path where dji-firmware-tools is before next step
 
-10. Call the packer script :
+#### 10. Call the packer script
 
 `./FC_patch_sequence_for_dummy_verify.sh Spark 03.02.43.21`
 or
@@ -522,4 +522,3 @@ While plotting the 3 "signals" : total satellites count, GPS satellites count an
 
 4 Galileo satellites launched in december 2017 are above us right now but one not been comissioned yet (24/08/2018). They should soon be commissioned and this will provide even more sats.
 4 more sats where launched on July 15th 2018 and should be commissionned beginning of 2019. Up to date info : https://www.gsc-europa.eu/system-status/Constellation-Information
-

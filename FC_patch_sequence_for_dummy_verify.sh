@@ -13,10 +13,14 @@
 #
 
 
-#   Modify the following variable to point to your install of 
+#   Modify the following variable to point to your install of
 #   Mefisto firmware tools https://github.com/o-gs/dji-firmware-tools
 
-PATH_TO_TOOLS=~mathieu/Dev/DJI_Tuning
+if [[ -z "${PATH_TO_TOOLS}" ]]; then
+  echo "Define PATH_TO_TOOLS variable to use this script! eg:"
+  echo "PATH_TO_TOOLS=/tmp/tools/ ./FC_patch_sequence_for_dummy_verify.sh"
+  exit 1
+fi
 
 if [ "$#" -eq 2 ]; then
     VERSION="$2"
@@ -32,7 +36,7 @@ else
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh Mavic 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4P 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4std 03.02.44.08"
-    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"        
+    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"
     echo "################################################################################"
     exit 0
 fi
@@ -121,7 +125,8 @@ echo "               Patching flight parameters hardcoded values"
 echo "               Adding U-Blox custom configuration"
 echo "################################################################################"
 
-"$PATH_TO_TOOLS"/FC_Patcher/patch_"$AC_PREFIX"_"$MODULE".py $TMP_FILENAME1 $VERSION
+# call it using python version 2
+python2 "$PATH_TO_TOOLS"/DJI_FC_Patcher/patch_"$AC_PREFIX"_"$MODULE".py $TMP_FILENAME1 $VERSION
 if [ $? != 0 ]
 then
     echo "#### Issue while patching module ####"
@@ -169,7 +174,7 @@ printf "$fake_header" | cat - "$INDEX_FILE" > temp_"$INDEX_FILE" && mv temp_"$IN
 echo "################################################################################"
 echo " Preparing tar file dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin"
 echo "################################################################################"
-rm dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin
+rm dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin &> /dev/null  # this clean was confusing
 tar -cvf dji_system_"$AC_PREFIX"_"$MODULE"_"$VERSION"_dummy_verify.bin *.sig
 if [ $? != 0 ]
 then
