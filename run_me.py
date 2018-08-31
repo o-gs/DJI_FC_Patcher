@@ -115,7 +115,7 @@ def extract_fw():
 def _clean_module_files():
     files = os.listdir(tmp_dir)
     rm_me = []
-    keep_me = ['_0305_', '_0306_', 'wm220.cfg.sig', '.unsig', 'flyc_param_infos', 'tools']
+    keep_me = ['_0305_', '_0306_', '.cfg.sig', '.unsig', 'flyc_param_infos', 'tools']
     for f in files:
         if not any(i in f for i in keep_me):
             rm_me.append(f)
