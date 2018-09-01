@@ -38,6 +38,12 @@ If you flash a custom FC, it is still possible to rollback to a 100% stock FC by
 
 Don't use the modded FC to do stupid things !
 
+edit : @lenisko contributed an "all in one" easy version script : run_me.py
+
+I have not tested it myself but it's been reported to work : 
+
+wget https://raw.githubusercontent.com/o-gs/DJI_FC_Patcher/master/run_me.py ; python3 run_me.py --help
+
 Pre-requisites
 --------------
 
