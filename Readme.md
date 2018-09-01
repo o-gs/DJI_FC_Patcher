@@ -38,11 +38,28 @@ If you flash a custom FC, it is still possible to rollback to a 100% stock FC by
 
 Don't use the modded FC to do stupid things !
 
-edit : @lenisko contributed an "all in one" easy version script : run_me.py
+All in one script
+--------------
+_I have not tested it myself but it's been reported to work -- @Matioupi_
 
-I have not tested it myself but it's been reported to work : 
+@lenisko contributed an "all in one" easy version script: `run_me.py`. Download script and run it with `--help`.
+```
+wget https://raw.githubusercontent.com/o-gs/DJI_FC_Patcher/master/run_me.py && python3 run_me.py --help
+```
+Before starting, ensure that you have installed `python2` and `python3` along with `pycrypto` python module (all of those are needed anyway for patch process).
 
-wget https://raw.githubusercontent.com/o-gs/DJI_FC_Patcher/master/run_me.py ; python3 run_me.py --help
+##### Example usage for Mavic Pro using Windows Subsystem for Linux on Windows 10
+```
+python3 run_me.py wm220 /mnt/q/V01.04.0300_Mavic_dji_system.bin
+```
+Script will guide you through process of patching FC.
+First argument is model which is described in script `--help`, second is full unix path to firmware file.
+In steps **#2** and **#5** you'll be asked to use `adb`, you have to switch to `cmd` navigate to provided path _(do linux->windows path convertion yourself ;-)_ and execute printed commands.
+
+##### Usage for Mavic Pro using Widnows and Linux separately
+Basically same as using WSL, but instead `cmd` on same computer, you have to run adb commands on Windows OS and move needed files between Linux <-> Windows to provided paths:
+ - for **#2** step: pulled `0306.unsig` from Windows to Linux,
+ - for **#5** step: `dummy_verify.sh` and `dji_system_wm220_0306_03.02.44.08_dummy_verify.bin` from Linux to Windows to continue `adb` and flashing process.
 
 Pre-requisites
 --------------
