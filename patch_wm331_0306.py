@@ -153,7 +153,7 @@ if __name__ == "__main__":
     newubxframes = newubxframes + ubxcfggen.genUBXCFGPMS(0x0,0,0)
     # "B562068608000000000000000000945A"    
     #horizonMask=5,minCN0=0,minSv=0,pDop=10.0,tDop=10.0,pAcc=30,tAcc=300,fixedAlt2D=0.0,fixedAltVar2D=1.0,staticHoldMaxSpeed=0,staticHoldMaxDist=0,dgnssTimeout=60
-    newubxframes = newubxframes + ubxcfggen.genUBXCFGNAV5(7,2,0,5,0,10.0,10.0,30,300,0.0,1.0,0,0,60)
+    newubxframes = newubxframes + ubxcfggen.genUBXCFGNAV5(7,2,0,5,0,0,10.0,10.0,30,300,0.0,1.0,0,0,60)
     # "B56206242400FFFF070200000000102700000500640064001E002C01003C000000000000000000000000E061"    
 
     #   New UBX-CFG-GNSS frame :

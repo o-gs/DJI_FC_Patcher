@@ -159,7 +159,7 @@ if __name__ == "__main__":
     #fixmode=2 : 3D only,
     #utcStandard=0 : automatic,
     #horizonMask=5,minCN0=0,minSv=0,pDop=10.0,tDop=10.0,pAcc=30,tAcc=300,fixedAlt2D=0.0,fixedAltVar2D=1.0,staticHoldMaxSpeed=0,staticHoldMaxDist=0,dgnssTimeout=60
-    newubxframes = newubxframes + ubxcfggen.genUBXCFGNAV5(7,2,0,5,0,10.0,10.0,30,300,0.0,1.0,0,0,60)
+    newubxframes = newubxframes + ubxcfggen.genUBXCFGNAV5(7,2,0,5,0,0,10.0,10.0,30,300,0.0,1.0,0,0,60)
     # "B56206242400FFFF070200000000102700000500640064001E002C01003C000000000000000000000000E061"
 
     #   New UBX-CFG-SBAS frame :
