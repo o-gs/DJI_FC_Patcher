@@ -48,6 +48,8 @@ wget https://raw.githubusercontent.com/o-gs/DJI_FC_Patcher/master/run_me.py && p
 ```
 Before starting, ensure that you have installed `python2` and `python3` along with `pycrypto` python module (all of those are needed anyway for patch process).
 
+__Sript can't be used directly from Windows ! and wasn't tested on Mac OS.__
+
 ##### Example usage for Mavic Pro using Windows Subsystem for Linux on Windows 10
 ```
 python3 run_me.py wm220 /mnt/q/V01.04.0300_Mavic_dji_system.bin
