@@ -48,7 +48,7 @@ wget https://raw.githubusercontent.com/o-gs/DJI_FC_Patcher/master/run_me.py && p
 ```
 Before starting, ensure that you have installed `python2` and `python3` along with `pycrypto` python module (all of those are needed anyway for patch process).
 
-__Sript can't be used directly from Windows ! and wasn't tested on Mac OS.__
+__Script can't be used directly from Windows ! and wasn't tested on Mac OS.__
 
 ##### Example usage for Mavic Pro using Windows Subsystem for Linux on Windows 10
 ```
@@ -58,7 +58,7 @@ Script will guide you through process of patching FC.
 First argument is model which is described in script `--help`, second is full unix path to firmware file.
 In steps **#2** and **#5** you'll be asked to use `adb`, you have to switch to `cmd` navigate to provided path _(do linux->windows path convertion yourself ;-)_ and execute printed commands.
 
-##### Usage for Mavic Pro using Widnows and Linux separately
+##### Usage for Mavic Pro using Windows and Linux separately
 Basically same as using WSL, but instead `cmd` on same computer, you have to run adb commands on Windows OS and move needed files between Linux <-> Windows to provided paths:
  - for **#2** step: pulled `0306.unsig` from Windows to Linux,
  - for **#5** step: `dummy_verify.sh` and `dji_system_wm220_0306_03.02.44.08_dummy_verify.bin` from Linux to Windows to continue `adb` and flashing process.
