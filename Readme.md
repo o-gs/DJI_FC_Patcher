@@ -305,7 +305,8 @@ Running the patcher without files all being inside same dir has not been tested
 
 #### 9. Export PATH_TO_TOOLS variable
 
-Run `export PATH_TO_TOOLS=X` where X is path where dji-firmware-tools is before next step
+Run `export PATH_TO_TOOLS=X` where X is path where dji-firmware-tools directory is before next step.
+Example: `export PATH_TO_TOOLS=/home/user/dji/tools` when `dji-firmware-tools` directory is inside `/home/user/dji/tools/`.
 
 #### 10. Call the packer script
 
