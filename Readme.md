@@ -20,7 +20,7 @@ at this point of first release, it works ONLY with the following firmware versio
 * 1.05.0600 for DJI Phantom 4 Pro
 * 2.00.0700 for DJI Phantom 4 standard
 * 1.00.0128 for DJI Phantom 4 advanced
-* 1.01.0200 for DJI Inspire 2
+* 1.02.0200 for DJI Inspire 2
 
 modder for Spark, Mavic Pro series, P4P are fully tested. Other birds are untested at this point, waiting for volunteers...
 Those untested birds include : I2, P4std, P4 standard

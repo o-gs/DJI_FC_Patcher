@@ -22,7 +22,7 @@ if __name__ == "__main__":
 
     print("")
     print("################################################################################")
-    print("this patcher is supposed to be used on the 0306 module of I2 V01.01.0200 fw")
+    print("this patcher is supposed to be used on the 0306 module of I2 V01.02.0200 fw")
     print("no checks of any kind done that, use at your own risks                          ")
     print("addresses must be given including the 0x420000 firmware loading offset          ")
     print("################################################################################")
@@ -41,29 +41,32 @@ if __name__ == "__main__":
     sn_parts.append(int(sn[0:2]))
     hex_parts = [ ]
     sn_hex = ""
+	
+	if ((sn_parts[0] != sn_parts[1]) or (sn_parts[2] != sn_parts[3])):
+		print("Because I2 V01.02.0200 firmware FC module has version 03.03.09.09")
+		print("only new versions of the form a.a.b.b can be used")		
+		exit(1)
     for i in range (0,4):
         hex_parts.append(unpack('>B',pack('<B',sn_parts[i]))[0])
         sn_hex += '%02x' % hex_parts[i]
 
     #   Change the firmware code inside image
     #
-    #   original I2 0306 version is 03.02.42.10 = 0A2A0203
-
+    #   original I2 0306 version is 03.03.09.09 = 09090303
+	
     # HardCoded version of the version in some FC function
-    p.patchByteAtAddress(0x522350,hex_parts[0])  #0x0A = 10
-    p.patchByteAtAddress(0x522352,hex_parts[1])  #0x2A = 42
-    p.patchByteAtAddress(0x52235E,hex_parts[2])  #0x2 = 2
-    p.patchByteAtAddress(0x522360,hex_parts[3])  #0x3 = 3
+    p.patchByteAtAddress(0x51E44C,hex_parts[0])  #0x09 = 9
+    p.patchByteAtAddress(0x51E458,hex_parts[3])  #0x3 = 3
     
     newversioncode = sn_hex
     print("New version code : %s\n" % newversioncode)
-    p.patchDataAtAddress(0x4F8E1C,newversioncode)
-    p.patchDataAtAddress(0x50AE00,newversioncode)
-    p.patchDataAtAddress(0x52259C,newversioncode)
-    p.patchDataAtAddress(0x52EAE0,newversioncode)
+    p.patchDataAtAddress(0x4595B0,newversioncode)
+    p.patchDataAtAddress(0x51C824,newversioncode)
+    p.patchDataAtAddress(0x51E6DC,newversioncode)
+    p.patchDataAtAddress(0x552700,newversioncode)
 
     # Ascii version of the version string
-    p.patchStringAtAddress(0x58B85D,sn)
+    #p.patchStringAtAddress(0x58B85D,sn)
 
     #
     #   Patch hardcoded values for some flight modes (e.g. autonomous waypoint missions)
@@ -75,15 +78,15 @@ if __name__ == "__main__":
     #       max dist to home point : 500 m
     #       min/max alt : -200 / + 500 m
     #
-    p.patchFloatAtAddress(0x4ADDF4,-5000.0)  #   Min altitude relative to home point : default -200.0 m OK I2
-    p.patchFloatAtAddress(0x4ADDF8,9000.0)   #   Max altitude relative to home point : default 1000.0 m OK I2
-    p.patchFloatAtAddress(0x4ADE40,32000.0)  #   Max distance from one waypoint to home point : default 2000.0 m  OK I2
-    p.patchFloatAtAddress(0x4AE2B4,128000.0) #   Max total length of mission : default 30000.0 m   OK I2    
-    p.patchFloatAtAddress(0x4AE308 ,25.0)    #   Max speed (positive value) : default  15.0 m/s OK I2
-    p.patchFloatAtAddress(0x4AE30C,-25.0)    #   Max speed (negative value) : default -15.0 m/s OK I2
-    p.patchFloatAtAddress(0x4AE310,-5000.0)  #   Min altitude relative to home point : default -200.0 m OK I2
-    p.patchFloatAtAddress(0x4AE314,9000.0)   #   Max altitude relative to home point : default 1000.0 m OK I2
-    p.patchFloatAtAddress(0x4AE98C,25.0)     #   Max speed for in-flight change speed message : default 15.0 m/s OK I2
+    p.patchFloatAtAddress(0x4C3850,-5000.0)  #   Min altitude relative to home point : default -200.0 m OK I2
+    p.patchFloatAtAddress(0x4C3854,9000.0)   #   Max altitude relative to home point : default 1000.0 m OK I2
+    p.patchFloatAtAddress(0x4C3C90,32000.0)  #   Max distance from one waypoint to home point : default 5000.0 m  OK I2
+    p.patchFloatAtAddress(0x4C3D0C,128000.0) #   Max total length of mission : default 60000.0 m   OK I2    
+    p.patchFloatAtAddress(0x4C3D98 ,25.0)    #   Max speed (positive value) : default  15.0 m/s OK I2
+    p.patchFloatAtAddress(0x4C3D9C,-25.0)    #   Max speed (negative value) : default -15.0 m/s OK I2
+    p.patchFloatAtAddress(0x4C3DA0,-5000.0)  #   Min altitude relative to home point : default -200.0 m OK I2
+    p.patchFloatAtAddress(0x4C3DA4,9000.0)   #   Max altitude relative to home point : default 1000.0 m OK I2
+    p.patchFloatAtAddress(0x4C4CE0,25.0)     #   Max speed for in-flight change speed message : default 15.0 m/s OK I2
 
     ubxmonver = "B5620A0400000E34"    #   Original DJI UBX-MON-VER
     
@@ -146,30 +149,30 @@ if __name__ == "__main__":
         p.addPageAtEndOfImage(256,1)
 
     #   Change the location of old UBX preforged frames to the new one
-    p.patchAddressAtAddress(0x51EA10,unmodded_firmware_end)
+    p.patchAddressAtAddress(0x5184A0,unmodded_firmware_end)
 
     #   Write new UBX frames at beginning of new page
     p.patchDataAtAddress(unmodded_firmware_end,newubxframes)
 
-	#	            ROM:0051E62E loc_51E62E                              ; DATA XREF: sub_51EDBA+C↓o
-	#	            ROM:0051E62E                 LDR             R0, [R0,#8]
-	# TO PATCH :	ROM:0051E630                 MOVS            R2, #8
-	#	            ROM:0051E632                 LDR             R1, =dword_5699D0
-	#	            ROM:0051E634                 B.W             sub_42A37C
-	#	            ROM:0051E638 ; ---------------------------------------------------------------------------
-	#	            ROM:0051E638                 LDR             R1, =dword_5699D0
-	# TO PATCH :	ROM:0051E63A                 MOVS            R2, #0x15
-	#	            ROM:0051E63C                 LDR             R0, [R0,#8]
-	# TO PATCH :	ROM:0051E63E                 ADDS            R1, #8
-	#	            ROM:0051E640                 B.W             sub_42A37C
-
+	#	            ROM:005180AA loc_5180AA                              ; DATA XREF: sub_518918+C↓o
+	#	            ROM:005180AA                 LDR             R0, [R0,#0x14]
+	# TO PATCH :	ROM:005180AC                 MOVS            R2, #8
+	#	            ROM:005180AE                 LDR             R1, =dword_55F700
+	#	            ROM:005180B0                 B.W             sub_4292CC
+	#	            ROM:005180B4 ; ---------------------------------------------------------------------------
+	#	            ROM:005180B4                 LDR             R1, =dword_55F700
+	# TO PATCH :	ROM:005180B6                 MOVS            R2, #0x15
+	#	            ROM:005180B8                 LDR             R0, [R0,#0x14]
+	# TO PATCH :	ROM:005180BA                 ADDS            R1, #8
+	#	            ROM:005180BC                 B.W             sub_4292CC	
+	
     #   Patch the instructions that get the size of the frames to send,
     #   New UBX frames must stay below 255 bytes total
     #    Minimal checks performed
 
-    p.patchByteAtAddress(0x51E630,length_part1)
-    p.patchByteAtAddress(0x51E63A,length_part2)
-    p.patchByteAtAddress(0x51E63E,length_part1)
+    p.patchByteAtAddress(0x5180AC,length_part1)
+    p.patchByteAtAddress(0x5180B6,length_part2)
+    p.patchByteAtAddress(0x5180BA,length_part1)
 
     #    Disable QCchecking instructions about LLH / ECEF mismatch
     
