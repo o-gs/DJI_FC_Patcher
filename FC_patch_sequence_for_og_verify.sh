@@ -29,7 +29,7 @@ else
     echo "  FC_patch_sequence_for_og_verify.sh 1.0 by @Matioupi"
     echo "  usage :"
     echo "          FC_patch_sequence_for_og_verify.sh birdname aa.bb.cc.dd"
-    echo "          birdname is one of Spark, Mavic, P4P, P4std, P4adv"
+    echo "          birdname is one of Spark, Mavic, P4P, P4std, P4adv, I2"
     echo "          aa.bb.cc.dd is the new FC 0306 module version number"
     echo ""
     echo "  exemple : ./FC_patch_sequence_for_og_verify.sh Spark 03.02.43.21"
@@ -37,6 +37,7 @@ else
     echo "  exemple : ./FC_patch_sequence_for_og_verify.sh P4P 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4std 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"
+    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh I2 03.02.42.11"
     echo "################################################################################"
 fi
 
@@ -85,13 +86,23 @@ then
 elif [ "$1" == "P4adv" ]
 then
    #   P4P = Phantom 4 Advanced
-   AC_PREFIX=wm332
+   AC_PREFIX=wm332    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh I2 03.02.42.11"
    FULL_ORIGINAL_FIRMWARE_VERSION="v01.00.0128"
    ORI_VERSION="03.02.35.05"
    ORI_FILEDATE=20170525
    ORI_MODULE_TIMESTAMP="2017-05-25 22:08:15"
    #escape the / from <\module> after copy/pasting the original data here
    ORI_MODULE_INFO='<module id="0306" version="03.02.35.05" type="" group="" size="1560864" md5="a4cea467d134f9c26f4dba76a0984fe2">wm332_0306_v03.02.35.05_20170525.pro.fw.sig<\/module>'
+elif [ "$1" == "I2" ]
+then
+   #   I2 = Inspire2
+   AC_PREFIX=wm620
+   FULL_ORIGINAL_FIRMWARE_VERSION="v01.01.0200"
+   ORI_VERSION="03.02.42.10"
+   ORI_FILEDATE=20170525
+   ORI_MODULE_TIMESTAMP="2017-10-20 22:17:38"
+   #escape the / from <\module> after copy/pasting the original data here
+   ORI_MODULE_INFO='<module id="0306" version="03.02.42.10" type="" group="" size="1491744" md5="85ef8b20ed5fd759ad2b2c2c77b86a3a">wm620_0306_v03.02.42.10_20171020.pro.fw.sig<\/module>'
 fi
 
 VERSIONSTR="v$VERSION"

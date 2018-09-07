@@ -1,5 +1,5 @@
-Custom FC patcher and flashing method for DJI Spark and DJI Mavic Pro / Pro Platinum and Phantom 4 / 4 Pro / 4 Adv
-==================================================================================================================
+Custom FC patcher and flashing method for DJI Spark and DJI Mavic Pro / Pro Platinum and Phantom 4 / 4 Pro / 4 Adv / I2
+=======================================================================================================================
 
 by @Matioupi (mathieu.peyrega@gmail.com), credits to all OG's for their work and ideas
 
@@ -11,6 +11,7 @@ FC (flight controller, a.k.a. 0306 module) on following DJI birds :
 * Phantom 4
 * Phantom 4 Pro
 * Phantom 4 advanced
+* Inspire 2
 
 at this point of first release, it works ONLY with the following firmware versions (which are pretty much the latest ones)
  
@@ -19,8 +20,12 @@ at this point of first release, it works ONLY with the following firmware versio
 * 1.05.0600 for DJI Phantom 4 Pro
 * 2.00.0700 for DJI Phantom 4 standard
 * 1.00.0128 for DJI Phantom 4 advanced
+* 1.01.0200 for DJI Inspire 2
 
 modder for Spark, Mavic Pro series, P4P are fully tested. Other birds are untested at this point, waiting for volunteers...
+Those untested birds include : I2, P4std, P4 standard
+
+Phantom 4 Pro/Pro+ V2 is NOT supported at this time
 
 The patcher allows you to tune :
 
