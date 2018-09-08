@@ -4,6 +4,7 @@ Licensed under DBaD licence http://dbad-license.org/
 """
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -32,6 +33,7 @@ def model_name(model):
         'wm330': 'P4std',
         'wm331': 'P4P',
         'wm332': 'P4adv',
+        'wm620': 'I2',
 
     }
     if model not in model_dict:
@@ -139,19 +141,22 @@ def user_0306_unsig():
     global old_fw_name
     old_fw_name = _find_fw_path()
     print("""
- -- 2. Connect your bird, ensure you have adb access and inside "{dir}" directory run separately those commands:
+ -- 2. Connect your bird, ensure you have adb access and inside "{dir}" directory.
+
+! Take a note that some paths might not be the same (which depends on root way and model). For details check !
+https://github.com/o-gs/DJI_FC_Patcher#4-unsig-the-0306-file--first-step-involving-some-actions-on-the-bird
+
+Run separately those commands:
 
 adb shell mount -o remount,rw /vendor
 adb push {fw_file} /vendor/bin/
 adb shell cd /vendor/bin/ ; /sbin/dji_verify -n 0306 -o 0306.unsig {fw_file}
 adb pull /vendor/bin/0306.unsig
 adb shell cd /vendor/bin/ ; rm 0306.unsig ; rm *.fw.sig ; cd / ; sync ;mount -o remount,ro /vendor
-""".format(
-        **{
-            "dir": tmp_dir,
-            "fw_file": old_fw_name
-        })
-    )
+""".format(**{
+        "dir": tmp_dir,
+        "fw_file": old_fw_name
+    }))
 
     user_prompt()
 
@@ -201,7 +206,10 @@ def user_edit_params():
 def call_packer():
     os.chdir(tmp_dir)
     os.remove(os.path.join(tmp_dir, old_fw_name))
-    var = input("\n -- 4. Provide desired 0306 module version (eg: 03.02.44.08): ")
+
+    var = ''
+    while not re.match('\d{2}\.\d{2}\.\d{2}\.\d{2}', var):
+        var = input("\n -- 4. Provide desired 0306 module version (eg: 03.02.44.08): ")
 
     try:
         os.environ["PATH_TO_TOOLS"] = tools_dir
@@ -215,11 +223,18 @@ def call_packer():
     shutil.copy(dummy_bin, "../")
     shutil.copy(os.path.join(tools_dir, "DJI_FC_Patcher", "dummy_verify.sh"), "../")
     shutil.copy("flyc_param_infos", "../")
+    shutil.copy("0306.unsig", "../")
 
 
 def verify_install():
     print("""
- -- 5. Run those commands separately in your console inside "{}" directory:
+ -- 5. Run those commands separately in your console inside "{main_dir}" directory.
+
+! Take a note that some paths might not be the same (which depends on root way and model). For details check !
+https://github.com/o-gs/DJI_FC_Patcher#12-install-the-dummy_verifysh-script-on-your-bird and
+https://github.com/o-gs/DJI_FC_Patcher#13-flash-the-bin-file-you-prepared-at-step-10-with-dumldore-v3
+
+Run separately those commands:
 
 adb shell mount -o remount,rw /vendor
 adb push dummy_verify.sh /vendor/bin/
@@ -229,9 +244,14 @@ Turn off and on your bird and run this command:
 
 adb shell mount -o bind /vendor/bin/dummy_verify.sh /sbin/dji_verify
 
-without futher restarting, flash {} using DUMLDore v3
-and continue from https://github.com/o-gs/DJI_FC_Patcher#14-check-your-upgrade-logs
-""".format(main_dir, dummy_bin))
+without futher restarting, flash {dummy_bin} using DUMLDore v3.
+Note: In file name picker write *.* and confirm using Enter to show all files in directory or rename {dummy_bin} to dji_system.bin.
+
+and continue from https://github.com/o-gs/DJI_FC_Patcher#14-check-your-upgrade-logs/
+""".format(**{
+        'main_dir': main_dir, 
+        'dummy_bin': dummy_bin
+    }))
 
 
 def script_run():
@@ -255,13 +275,14 @@ parser = ArgumentParser(
     formatter_class=RawTextHelpFormatter,
     description="""
 Custom FC patcher helper.
-    
+
     Supported models:
-    * wm100 - DJI Spark
-    * wm220 - DJI Mavic Pro series (incl. Platinium) (wm220)
-    * wm330 - Phantom 4
-    * wm331 - Phantom 4 Pro
-    * wm332 - Phantom 4 advanced
+    * wm100 - DJI Spark (v01.00.0900)
+    * wm220 - DJI Mavic Pro series (incl. Platinium) (wm220) (v01.04.0300)
+    * wm330 - Phantom 4 (v02.00.0700)
+    * wm331 - Phantom 4 Pro (v01.05.0600)
+    * wm332 - Phantom 4 advanced (v01.00.0128)
+    * wm620 - Inspire 2 (v01.02.0200)
 """
 )
 
