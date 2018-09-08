@@ -208,7 +208,7 @@ def call_packer():
     os.remove(os.path.join(tmp_dir, old_fw_name))
 
     var = ''
-    while re.match('\d{2}\.\d{2}\.\d{2}\.\d{2}', var):
+    while not re.match('\d{2}\.\d{2}\.\d{2}\.\d{2}', var):
         var = input("\n -- 4. Provide desired 0306 module version (eg: 03.02.44.08): ")
 
     try:
