@@ -219,6 +219,7 @@ def call_packer():
     shutil.copy(dummy_bin, "../")
     shutil.copy(os.path.join(tools_dir, "DJI_FC_Patcher", "dummy_verify.sh"), "../")
     shutil.copy("flyc_param_infos", "../")
+    shutil.copy("0306.unsig", "../")
 
 
 def verify_install():
