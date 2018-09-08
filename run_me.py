@@ -246,7 +246,7 @@ and continue from https://github.com/o-gs/DJI_FC_Patcher#14-check-your-upgrade-l
 """.format(**{
         'main_dir': main_dir, 
         'dummy_bin': dummy_bin
-    ))
+    }))
 
 
 def script_run():
@@ -270,7 +270,7 @@ parser = ArgumentParser(
     formatter_class=RawTextHelpFormatter,
     description="""
 Custom FC patcher helper.
-    
+
     Supported models:
     * wm100 - DJI Spark (v01.00.0900)
     * wm220 - DJI Mavic Pro series (incl. Platinium) (wm220) (v01.04.0300)
