@@ -4,6 +4,7 @@ Licensed under DBaD licence http://dbad-license.org/
 """
 
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -205,7 +206,10 @@ def user_edit_params():
 def call_packer():
     os.chdir(tmp_dir)
     os.remove(os.path.join(tmp_dir, old_fw_name))
-    var = input("\n -- 4. Provide desired 0306 module version (eg: 03.02.44.08): ")
+
+    var = ''
+    while re.match('\d{2}\.\d{2}\.\d{2}\.\d{2}', var):
+        var = input("\n -- 4. Provide desired 0306 module version (eg: 03.02.44.08): ")
 
     try:
         os.environ["PATH_TO_TOOLS"] = tools_dir
