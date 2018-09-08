@@ -32,6 +32,7 @@ def model_name(model):
         'wm330': 'P4std',
         'wm331': 'P4P',
         'wm332': 'P4adv',
+        'wm620': 'I2',
 
     }
     if model not in model_dict:
@@ -139,19 +140,22 @@ def user_0306_unsig():
     global old_fw_name
     old_fw_name = _find_fw_path()
     print("""
- -- 2. Connect your bird, ensure you have adb access and inside "{dir}" directory run separately those commands:
+ -- 2. Connect your bird, ensure you have adb access and inside "{dir}" directory.
+
+! Take a note that some paths might not be the same (which depends on root way and model). For details check !
+https://github.com/o-gs/DJI_FC_Patcher#4-unsig-the-0306-file--first-step-involving-some-actions-on-the-bird
+
+Run separately those commands:
 
 adb shell mount -o remount,rw /vendor
 adb push {fw_file} /vendor/bin/
 adb shell cd /vendor/bin/ ; /sbin/dji_verify -n 0306 -o 0306.unsig {fw_file}
 adb pull /vendor/bin/0306.unsig
 adb shell cd /vendor/bin/ ; rm 0306.unsig ; rm *.fw.sig ; cd / ; sync ;mount -o remount,ro /vendor
-""".format(
-        **{
-            "dir": tmp_dir,
-            "fw_file": old_fw_name
-        })
-    )
+""".format(**{
+        "dir": tmp_dir,
+        "fw_file": old_fw_name
+    }))
 
     user_prompt()
 
@@ -219,7 +223,13 @@ def call_packer():
 
 def verify_install():
     print("""
- -- 5. Run those commands separately in your console inside "{}" directory:
+ -- 5. Run those commands separately in your console inside "{}" directory.
+
+! Take a note that some paths might not be the same (which depends on root way and model). For details check !
+https://github.com/o-gs/DJI_FC_Patcher#12-install-the-dummy_verifysh-script-on-your-bird and
+https://github.com/o-gs/DJI_FC_Patcher#13-flash-the-bin-file-you-prepared-at-step-10-with-dumldore-v3
+
+Run separately those commands:
 
 adb shell mount -o remount,rw /vendor
 adb push dummy_verify.sh /vendor/bin/
@@ -257,11 +267,12 @@ parser = ArgumentParser(
 Custom FC patcher helper.
     
     Supported models:
-    * wm100 - DJI Spark
-    * wm220 - DJI Mavic Pro series (incl. Platinium) (wm220)
-    * wm330 - Phantom 4
-    * wm331 - Phantom 4 Pro
-    * wm332 - Phantom 4 advanced
+    * wm100 - DJI Spark (v01.00.0900)
+    * wm220 - DJI Mavic Pro series (incl. Platinium) (wm220) (v01.04.0300)
+    * wm330 - Phantom 4 (v02.00.0700)
+    * wm331 - Phantom 4 Pro (v01.05.0600)
+    * wm332 - Phantom 4 advanced (v01.00.0128)
+    * wm620 - Inspire 2 (v01.02.0200)
 """
 )
 
