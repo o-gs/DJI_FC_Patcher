@@ -223,7 +223,7 @@ def call_packer():
 
 def verify_install():
     print("""
- -- 5. Run those commands separately in your console inside "{}" directory.
+ -- 5. Run those commands separately in your console inside "{main_dir}" directory.
 
 ! Take a note that some paths might not be the same (which depends on root way and model). For details check !
 https://github.com/o-gs/DJI_FC_Patcher#12-install-the-dummy_verifysh-script-on-your-bird and
@@ -239,9 +239,14 @@ Turn off and on your bird and run this command:
 
 adb shell mount -o bind /vendor/bin/dummy_verify.sh /sbin/dji_verify
 
-without futher restarting, flash {} using DUMLDore v3
-and continue from https://github.com/o-gs/DJI_FC_Patcher#14-check-your-upgrade-logs
-""".format(main_dir, dummy_bin))
+without futher restarting, flash {dummy_bin} using DUMLDore v3.
+Note: In file name picker write *.* and confirm using Enter to show all files in directory or rename {dummy_bin} to dji_system.bin.
+
+and continue from https://github.com/o-gs/DJI_FC_Patcher#14-check-your-upgrade-logs/
+""".format(**{
+        'main_dir': main_dir, 
+        'dummy_bin': dummy_bin
+    ))
 
 
 def script_run():
