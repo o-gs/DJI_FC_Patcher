@@ -1,5 +1,5 @@
-Custom FC patcher and flashing method for DJI Spark and DJI Mavic Pro / Pro Platinum and Phantom 4 / 4 Pro / 4 Adv / I2
-=======================================================================================================================
+Custom FC patcher and flashing method for DJI Spark, Mavic Pro / Pro Platinum, Phantom 4 / 4 Pro / 4 Adv, I2
+============================================================================================================
 
 by @Matioupi (mathieu.peyrega@gmail.com), credits to all OG's for their work and ideas
 
@@ -8,10 +8,10 @@ FC (flight controller, a.k.a. 0306 module) on following DJI birds :
  
 * DJI Spark
 * DJI Mavic Pro series (incl. Platinium)
-* Phantom 4
-* Phantom 4 Pro
-* Phantom 4 advanced
-* Inspire 2
+* DJI Phantom 4
+* DJI Phantom 4 Pro
+* DJI Phantom 4 advanced
+* DJI Inspire 2
 
 at this point of first release, it works ONLY with the following firmware versions (which are pretty much the latest ones)
  
@@ -148,6 +148,24 @@ cd6bb6a75a38d4933315dafc2007c49c  wm220_0306_v03.02.44.07_20171116.pro.fw.sig
 95881f4318c105ea9a726837ee02f5db  wm331.cfg.sig
 ```
 
+(Files with their md5 hash for P4std) : there is no 0305 module for this P4std fw version
+```
+b146c251760f3a32208d06cbc931ae8f  wm330_0306_v03.02.44.07_20171116.pro.fw.sig
+f69c909388572a5f58d06546663e0ab9  wm330.cfg.sig
+```
+
+(Files with their md5 hash for P4adv) : there is no 0305 module for this P4adv fw version
+```
+a4cea467d134f9c26f4dba76a0984fe2  wm332_0306_v03.02.35.05_20170525.pro.fw.sig
+7500dd1c92a9f2065814ff4cb004ee92  wm332.cfg.sig
+```
+
+(Files with their md5 hash for I2) : there is no 0305 module for this I2 fw version
+```
+a71c9b796c9f9877ae28dabc448b4394  wm620_0306_v03.03.09.09_20180704.pro.fw.sig
+617a47c2d92264a15b72b37fe2e35742  wm620.cfg.sig
+```
+
 #### 2. Extract / unsig the .cfg file
 
 the .cfg file matching the .cfg.sig file can be retrieved with the image.py script from dji_rev :
@@ -174,9 +192,12 @@ mv wm331.cfg_0000.bin wm331.cfg.ori
 
 the result file should have the following md5 hash :
 ```
-3acb256304aaf5239814207da7d94cad  wm100a.cfg.ori
-f0b9aff5199745ff0eab4d189d9f562a  wm220.cfg.ori
-4a8dc7297c4bb093568ea79df7ec5073  wm331.cfg.ori
+3acb256304aaf5239814207da7d94cad  wm100a.cfg.ori (Spark)
+f0b9aff5199745ff0eab4d189d9f562a  wm220.cfg.ori (Mavic)
+4a8dc7297c4bb093568ea79df7ec5073  wm331.cfg.ori (P4P)
+724073ca4fb2e920c7a76995d243853f  wm330.cfg.ori (P4std)
+966708d12656ac0a8144881f2b319a79  wm332.cfg.ori (P4adv)
+57ca69564cc379e5d3a5ab5eb6112421  wm620.cfg.ori (I2)
 ```
 
 #### 3. Copy the 0305 file next to the .cfg.ori file without modifying it in anyway (no need to decrypt unsig or whatever)
@@ -240,6 +261,9 @@ You can check the pulled out file :
 fb9d4f10163a11d6b13fe510aa79b731  0306.unsig (Spark)
 7d030a568bd337c4fe575626fd7a2862  0306.unsig (Mavic Pro)
 80d6dda3b107285872c30d93354d7384  0306.unsig (P4P)
+f85ea3ffd0b505899e021c8463819a2d  0306.unsig (P4std)
+41ce28fc3732fa87d391b4c7d4b0dd98  0306.unsig (P4adv)
+dd9d1463c5cf3a940b15adce64e29fcc  0306.unsig (I2)
 ```
 
 At this stage you have unsigged the files but they are still encrypted.
@@ -261,9 +285,13 @@ or
 Result file md5 hashes that you should get :
 
 ```
-aaeb606a4a86fb1fc9a0f6bc6314d3a4  wm100_0306_v03.02.43.20_20170920.pro.fw_0306.decrypted.bin
-03ca7a87993ae824dac37345e187fab8  wm220_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin
-1ce9b3049390b77d7941cabcc312106e  wm331_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin
+aaeb606a4a86fb1fc9a0f6bc6314d3a4  wm100_0306_v03.02.43.20_20170920.pro.fw_0306.decrypted.bin (Spark)
+03ca7a87993ae824dac37345e187fab8  wm220_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (Mavic)
+1ce9b3049390b77d7941cabcc312106e  wm331_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (P4P)
+bfc89ec4225a3a7f168cb6056f8b0754  wm330_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (P4std)
+e614205e1c868cd766727ac44aef2cc2  wm620_0306_v03.03.09.09_20180704.pro.fw_0306.decrypted.bin (P4adv)
+5a9297e4a9d56eb36beb7c8f8e93bd94  wm332_0306_v03.02.35.05_20170525.pro.fw_0306.decrypted.bin (I2)
+
 ```
 
 At this stage, you have a decrypted version of the 0306 flight controller module. You can check the binary file
