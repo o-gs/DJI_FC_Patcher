@@ -385,12 +385,10 @@ The .cfg.sig file contains lines for modules that are not inside the .bin but yo
 #### 12. Install the dummy_verify.sh script on your bird
 
 adb to your bird :
-```
-adb shell
+`adb shell`
 
 make the /vendor partition read-write :
-mount -o remount,rw /vendor
-```
+`mount -o remount,rw /vendor`
 
 exit the adb shell :
 `exit`
