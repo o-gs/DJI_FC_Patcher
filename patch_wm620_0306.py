@@ -42,7 +42,7 @@ if __name__ == "__main__":
     hex_parts = [ ]
     sn_hex = ""
 	
-	if ((sn_parts[0] != sn_parts[1]) or (sn_parts[2] != sn_parts[3])):
+    if ((sn_parts[0] != sn_parts[1]) or (sn_parts[2] != sn_parts[3])):
 		print("Because I2 V01.02.0200 firmware FC module has version 03.03.09.09")
 		print("only new versions of the form a.a.b.b can be used")		
 		exit(1)
@@ -154,7 +154,7 @@ if __name__ == "__main__":
     #   Write new UBX frames at beginning of new page
     p.patchDataAtAddress(unmodded_firmware_end,newubxframes)
 
-	#	            ROM:005180AA loc_5180AA                              ; DATA XREF: sub_518918+C↓o
+	#	            ROM:005180AA loc_5180AA                              ; DATA XREF: sub_518918+C
 	#	            ROM:005180AA                 LDR             R0, [R0,#0x14]
 	# TO PATCH :	ROM:005180AC                 MOVS            R2, #8
 	#	            ROM:005180AE                 LDR             R1, =dword_55F700

@@ -100,7 +100,7 @@ then
    AC_PREFIX=wm620
    FULL_ORIGINAL_FIRMWARE_VERSION="v01.02.0200"
    ORI_VERSION="03.03.09.09"
-   ORI_FILEDATE=20170525
+   ORI_FILEDATE=20180704
    ORI_MODULE_TIMESTAMP="2018-07-04 19:05:21"
    #escape the / from <\module> after copy/pasting the original data here
    ORI_MODULE_INFO='<module id="0306" version="03.03.09.09" type="" group="" size="1463072" md5="a71c9b796c9f9877ae28dabc448b4394">wm620_0306_v03.03.09.09_20180704.pro.fw.sig<\/module>'
