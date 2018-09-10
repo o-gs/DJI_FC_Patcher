@@ -289,9 +289,8 @@ aaeb606a4a86fb1fc9a0f6bc6314d3a4  wm100_0306_v03.02.43.20_20170920.pro.fw_0306.d
 03ca7a87993ae824dac37345e187fab8  wm220_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (Mavic)
 1ce9b3049390b77d7941cabcc312106e  wm331_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (P4P)
 bfc89ec4225a3a7f168cb6056f8b0754  wm330_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (P4std)
-e614205e1c868cd766727ac44aef2cc2  wm620_0306_v03.03.09.09_20180704.pro.fw_0306.decrypted.bin (P4adv)
-5a9297e4a9d56eb36beb7c8f8e93bd94  wm332_0306_v03.02.35.05_20170525.pro.fw_0306.decrypted.bin (I2)
-
+5a9297e4a9d56eb36beb7c8f8e93bd94  wm332_0306_v03.02.35.05_20170525.pro.fw_0306.decrypted.bin (P4adv)
+e614205e1c868cd766727ac44aef2cc2  wm620_0306_v03.03.09.09_20180704.pro.fw_0306.decrypted.bin (I2)
 ```
 
 At this stage, you have a decrypted version of the 0306 flight controller module. You can check the binary file
