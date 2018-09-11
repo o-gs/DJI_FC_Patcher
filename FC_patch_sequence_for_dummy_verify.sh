@@ -38,6 +38,7 @@ else
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4std 03.02.44.08"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4adv 03.02.35.06"
     echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh I2 03.03.10.10"
+    echo "  exemple : ./FC_patch_sequence_for_dummy_verify.sh P4PV2 03.03.04.14"
     echo "################################################################################"
     exit 0
 fi
@@ -104,6 +105,16 @@ then
    ORI_MODULE_TIMESTAMP="2018-07-04 19:05:21"
    #escape the / from <\module> after copy/pasting the original data here
    ORI_MODULE_INFO='<module id="0306" version="03.03.09.09" type="" group="" size="1463072" md5="a71c9b796c9f9877ae28dabc448b4394">wm620_0306_v03.03.09.09_20180704.pro.fw.sig<\/module>'
+elif [ "$1" == "P4PV2" ]
+then
+   #   P4PV2 = Phantom 4 Pro/Pro+ V2
+   AC_PREFIX=wm335
+   FULL_ORIGINAL_FIRMWARE_VERSION="v01.00.1500"
+   ORI_VERSION="03.03.04.13"
+   ORI_FILEDATE=20180525
+   ORI_MODULE_TIMESTAMP="2018-05-25 15:27:34"
+   #escape the / from <\module> after copy/pasting the original data here
+   ORI_MODULE_INFO='<module id="0306" version="03.03.04.13" type="" group="ac" size="1437728" md5="4d60509ca1a7565766d425372b262eab">wm335_0306_v03.03.04.13_20180525.pro.fw.sig<\/module>'
 fi
 
 VERSIONSTR="v$VERSION"

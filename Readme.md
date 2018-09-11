@@ -12,6 +12,7 @@ FC (flight controller, a.k.a. 0306 module) on following DJI birds :
 * DJI Phantom 4 Pro
 * DJI Phantom 4 advanced
 * DJI Inspire 2
+* DJI Phantom 4 Pro/Pro+ V2
 
 at this point of first release, it works ONLY with the following firmware versions (which are pretty much the latest ones)
  
@@ -21,11 +22,12 @@ at this point of first release, it works ONLY with the following firmware versio
 * 2.00.0700 for DJI Phantom 4 standard
 * 1.00.0128 for DJI Phantom 4 advanced
 * 1.02.0200 for DJI Inspire 2
+* 1.00.1500 for DJI Phantom 4 Pro/Pro+ V2
 
 modder for Spark, Mavic Pro series, P4P are fully tested. Other birds are untested at this point, waiting for volunteers...
-Those untested birds include : I2, P4std, P4 standard
+Those untested birds include : I2, P4std, P4 standard, P4P V2
 
-Phantom 4 Pro/Pro+ V2 is NOT supported at this time
+Some features that may require app side support will not work on P4PV2
 
 The patcher allows you to tune :
 
@@ -166,6 +168,12 @@ a71c9b796c9f9877ae28dabc448b4394  wm620_0306_v03.03.09.09_20180704.pro.fw.sig
 617a47c2d92264a15b72b37fe2e35742  wm620.cfg.sig
 ```
 
+(Files with their md5 hash for P4PV2) : there is no 0305 module for this P4PV2 fw version
+```
+4d60509ca1a7565766d425372b262eab  wm335_0306_v03.03.04.13_20180525.pro.fw.sig
+d91a50134a89cf8f4fb89bf7d98b476b  wm335.cfg.sig
+```
+
 #### 2. Extract / unsig the .cfg file
 
 the .cfg file matching the .cfg.sig file can be retrieved with the image.py script from dji_rev :
@@ -198,6 +206,7 @@ f0b9aff5199745ff0eab4d189d9f562a  wm220.cfg.ori (Mavic)
 724073ca4fb2e920c7a76995d243853f  wm330.cfg.ori (P4std)
 966708d12656ac0a8144881f2b319a79  wm332.cfg.ori (P4adv)
 57ca69564cc379e5d3a5ab5eb6112421  wm620.cfg.ori (I2)
+5d4e2679a8b9f20c2efa3ee53695ad35  wm335.cfg.ori (P4PV2)
 ```
 
 #### 3. Copy the 0305 file next to the .cfg.ori file without modifying it in anyway (no need to decrypt unsig or whatever)
@@ -264,6 +273,7 @@ fb9d4f10163a11d6b13fe510aa79b731  0306.unsig (Spark)
 f85ea3ffd0b505899e021c8463819a2d  0306.unsig (P4std)
 41ce28fc3732fa87d391b4c7d4b0dd98  0306.unsig (P4adv)
 dd9d1463c5cf3a940b15adce64e29fcc  0306.unsig (I2)
+7fc44b010aa3eddb86a6252f6092443c  0306.unsig (P4PV2)
 ```
 
 At this stage you have unsigged the files but they are still encrypted.
@@ -291,6 +301,7 @@ aaeb606a4a86fb1fc9a0f6bc6314d3a4  wm100_0306_v03.02.43.20_20170920.pro.fw_0306.d
 bfc89ec4225a3a7f168cb6056f8b0754  wm330_0306_v03.02.44.07_20171116.pro.fw_0306.decrypted.bin (P4std)
 5a9297e4a9d56eb36beb7c8f8e93bd94  wm332_0306_v03.02.35.05_20170525.pro.fw_0306.decrypted.bin (P4adv)
 e614205e1c868cd766727ac44aef2cc2  wm620_0306_v03.03.09.09_20180704.pro.fw_0306.decrypted.bin (I2)
+2c711646e9fe163fbc647e39ed513d13  wm335_0306_v03.03.04.13_20180525.pro.fw_0306.decrypted.bin (P4PV2)
 ```
 
 At this stage, you have a decrypted version of the 0306 flight controller module. You can check the binary file
