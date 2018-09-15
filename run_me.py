@@ -34,6 +34,7 @@ def model_name(model):
         'wm331': 'P4P',
         'wm332': 'P4adv',
         'wm620': 'I2',
+        'wm335': 'P4PV2',
 
     }
     if model not in model_dict:
@@ -98,6 +99,10 @@ def tools_dl():
             subprocess.check_output(["git", "clone", "--quiet", repo_url])
         except subprocess.CalledProcessError as error:
             raise Error(error.returncode, error.output)
+
+
+def execution_perm():
+    subprocess.call("find %s -name \"*.sh\" -exec chmod +x {} \\;" % tools_dir, shell=True)
 
 
 def extract_fw():
@@ -260,6 +265,7 @@ def script_run():
     path_creation()
     check_python()
     tools_dl()
+    execution_perm()
     extract_fw()
     extract_306_fw()
     user_0306_unsig()
@@ -282,7 +288,8 @@ Custom FC patcher helper.
     * wm330 - Phantom 4 (v02.00.0700)
     * wm331 - Phantom 4 Pro (v01.05.0600)
     * wm332 - Phantom 4 advanced (v01.00.0128)
-    * wm620 - Inspire 2 (v01.02.0200)
+    * wm620 - Inspire 2 (v01.02.0200) [Untested]
+    * wm335 - Phantom 4 Pro/Pro+ V2 (v01.00.1500) [Untested]
 """
 )
 
