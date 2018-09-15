@@ -100,6 +100,10 @@ def tools_dl():
             raise Error(error.returncode, error.output)
 
 
+def execution_perm():
+    subprocess.call("find %s -name \"*.sh\" -exec chmod +x {} \\;" % tools_dir, shell=True)
+
+
 def extract_fw():
     os.chdir(tmp_dir)
     try:
@@ -260,6 +264,7 @@ def script_run():
     path_creation()
     check_python()
     tools_dl()
+    execution_perm()
     extract_fw()
     extract_306_fw()
     user_0306_unsig()
