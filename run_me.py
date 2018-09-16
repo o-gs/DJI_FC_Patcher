@@ -156,6 +156,7 @@ https://github.com/o-gs/DJI_FC_Patcher#4-unsig-the-0306-file--first-step-involvi
 Run separately those commands:
 
 adb shell mount -o remount,rw /vendor
+adb shell mkdir /vendor/bin
 adb push {fw_file} /vendor/bin/
 adb shell cd /vendor/bin/ ; /sbin/dji_verify -n 0306 -o 0306.unsig {fw_file}
 adb pull /vendor/bin/0306.unsig
