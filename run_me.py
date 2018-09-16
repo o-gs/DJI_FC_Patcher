@@ -146,7 +146,9 @@ def user_0306_unsig():
     global old_fw_name
     old_fw_name = _find_fw_path()
     print("""
- -- 2. Connect your bird, ensure you have adb access and inside "{dir}" directory.
+ -- 2. Connect your bird, ensure you have adb access and inside "{dir}"
+ directory. If not or you are using a separate system for that, make sure
+to copy the resulting 0306.unsig file into this directory before continuing.
 
 ! Take a note that some paths might not be the same (which depends on root way and model). For details check !
 https://github.com/o-gs/DJI_FC_Patcher#4-unsig-the-0306-file--first-step-involving-some-actions-on-the-bird
