@@ -219,6 +219,9 @@ adb to your bird :
 make the /vendor partition read-write :
 `mount -o remount,rw /vendor`
 
+create the /vendor/bin directory which might not exist yet :
+`mkdir /vendor/bin`
+
 exit the adb shell :
 `exit`
 
